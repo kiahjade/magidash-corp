@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to MagiDash Corp - Our mission is to empower people in corporations to have one place to visualise any data relevant to their job. As such, we create rich and flexible dashboarding tools which will integrate seamlessly with any data source and present the data in many different formats. 
+Welcome to MagiDash Corp - Our mission is to empower people in corporations to have one place to visualise any data relevant to their job. As such, we create rich and flexible dashboarding tools which will integrate seamlessly with any data source and present the data in many different formats.
 
 To get the project started we want to be able to show a list of dummy dashboards to users so that we can get a feel for if the clients like the concepts in a demo form.
 
@@ -13,6 +13,7 @@ Provided is a docker based environment that uses [docker-compose](https://docs.d
 Your task is to build an api service which implements a `/dashboards` endpoint that returns a list of dashboard objects retrieved from the mysql database provided.
 
 The expected format of the dashboard object should be roughly
+
 ```json
 {
   "id": <Long>,
@@ -52,3 +53,32 @@ scripts will be run automatically.
 To apply any script changes when the database is already running you will need to stop the running database container
 and destroy it. Running `docker-compose down` will stop the environment and destroy the containers for you, the next
 time you bring the environment up the containers will be created again.
+
+#### Project Set Up
+
+- Clone this repo
+- Navigate to magidash-corp/api
+- Run command "npm install"
+- Run command "docker-compose up --force-recreate"
+- Ensure API service is running on port 5000 successfully
+- Ensure mySql service is running on port 3306 successfully
+- As an extra check, ensure http://localhost:5000/ returns the welcome message
+
+#### DB Set Up
+
+At this stage of project completion we do not have an automated DB seed script.
+
+- Open the DB container in CLI
+- Enter mysql using the command "mysql -u root -p definitions"
+- Enter password "test123"
+- Create the dashboards table using the mysql statement found in magidash-corp/database/01-initial-db.sql
+
+#### API
+
+Note: Docker container must be running successfully on port 5000
+
+- Check the API is working in browser at URL http://localhost:5000/api/dashboards
+- Initially you should see a blank array
+- Seed the DB using Postman:
+- Create a post request to URL http://localhost:5000/api/add-dashboard
+- Check this has been created by using GET req http://localhost:5000/api/dashboards
